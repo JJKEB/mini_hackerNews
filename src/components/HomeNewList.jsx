@@ -1,8 +1,8 @@
 import axios from 'axios';
 import usePromise from '../lib/usePromise';
-import HomeTopItem from './HomeTopItem';
+import HomeNewItem from './HomeNewItem';
 
-const HomeTopList = ({ type, id }) => {
+const HomeNewList = ({ type, id }) => {
   const params = type === 'item' || type === 'user' ? `${type}/${id}` : type;
 
   const [loading, response, error] = usePromise(() => {
@@ -22,15 +22,16 @@ const HomeTopList = ({ type, id }) => {
     return console.log('에러발생');
   }
 
-  const searchId = response.slice(0, 15);
+  const searchId = response.slice(0, 4);
+  console.log(searchId);
 
   return (
     <ul>
       {searchId.map((id, i) => (
-        <HomeTopItem key={id} type={'item'} id={id} index={i} />
+        <HomeNewItem key={id} type={'item'} id={id} index={i} />
       ))}
     </ul>
   );
 };
 
-export default HomeTopList;
+export default HomeNewList;

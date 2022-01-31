@@ -1,13 +1,12 @@
-import React from 'react';
 import axios from 'axios';
 import usePromise from '../lib/usePromise';
+import lastTime from '../lib/lastTime';
 
 const HomeTopItem = ({ type, id, index }) => {
+  const params = type === 'item' || type === 'user' ? `${type}/${id}` : type;
+
   const [loading, response, error] = usePromise(() => {
-    const params = type === 'item' || type === 'user' ? `${type}/${id}` : type;
-    return axios.get(
-      `https://hacker-news.firebaseio.com/v0/${params}.json?print=pretty`,
-    );
+    return axios.get(`https://hacker-news.firebaseio.com/v0/${params}.json`);
   }, [id]);
 
   // 대기중
@@ -23,20 +22,19 @@ const HomeTopItem = ({ type, id, index }) => {
     return console.log('에러발생');
   }
 
-  // const searchId = response.slice(0, 15);
-  // console.log(searchId);
-
-  console.log('loading : ', loading);
-  console.log('response : ', response);
-  console.log('error : ', error);
-
-  const { title, score, time, url } = response;
+  const { title, by, score, time, url } = response;
 
   return (
     <li>
       <div className="num">{index + 1}</div>
       <div className="content">
-        <strong>{title}</strong>
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <strong>{title}</strong>
+          <p>
+            {by} {score} points
+          </p>
+          {time !== undefined && <span>{lastTime(time)}</span>}
+        </a>
       </div>
     </li>
   );

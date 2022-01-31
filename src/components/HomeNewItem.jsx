@@ -1,8 +1,8 @@
 import axios from 'axios';
 import usePromise from '../lib/usePromise';
-import HomeTopItem from './HomeTopItem';
+import lastTime from '../lib/lastTime';
 
-const HomeTopList = ({ type, id }) => {
+const HomeNewItem = ({ type, id, index }) => {
   const params = type === 'item' || type === 'user' ? `${type}/${id}` : type;
 
   const [loading, response, error] = usePromise(() => {
@@ -22,15 +22,20 @@ const HomeTopList = ({ type, id }) => {
     return console.log('에러발생');
   }
 
-  const searchId = response.slice(0, 15);
+  const { title, by, time, url } = response;
 
   return (
-    <ul>
-      {searchId.map((id, i) => (
-        <HomeTopItem key={id} type={'item'} id={id} index={i} />
-      ))}
-    </ul>
+    <li>
+      <div className="num">{index + 1}</div>
+      <div className="content">
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <strong>{title}</strong>
+          <p>{by}</p>
+          {time !== undefined && <span>{lastTime(time)}</span>}
+        </a>
+      </div>
+    </li>
   );
 };
 
-export default HomeTopList;
+export default HomeNewItem;
