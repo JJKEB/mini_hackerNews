@@ -1,13 +1,15 @@
-import React from 'react';
-import HomeNewList from '../components/HomeNewList';
-import HomeTopList from '../components/HomeTopList';
+// import HomeNewList from '../components/HomeNewList';
+import Top from '../components/home/Top';
+import New from '../components/home/New';
+import Show from '../components/home/Show';
 
 const Home = () => {
   return (
-    <>
-      <HomeTopList type={'topstories'} />
-      <HomeNewList type={'newstories'} />
-    </>
+    <div className="home-content">
+      <Top type={'topstories'} />
+      <New type={'newstories'} />
+      <Show type={'showstories'} />
+    </div>
   );
 };
 

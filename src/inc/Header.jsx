@@ -9,7 +9,7 @@ const HeaderBlock = styled.header`
 const Header = () => {
   return (
     <HeaderBlock>
-      header
+      <h1>svelte Hacker news</h1>
       <Lnb />
     </HeaderBlock>
   );

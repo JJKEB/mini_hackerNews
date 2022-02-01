@@ -1,9 +1,12 @@
-/**
- * @param {*} oldTime : Unix time
- */
+export function randomNum(min, max, decimal = 0) {
+  return parseFloat((Math.random() * (max - min) + min).toFixed(decimal));
+}
 
-function lastTime(time) {
-  console.log('ttt');
+export function getType(data) {
+  return Object.prototype.toString.call(data).slice(8, -1);
+}
+
+export function lastTime(time) {
   const oldMs = time * 1000;
   const currentMs = new Date().getTime();
   const IntervalMinute = (currentMs - oldMs) / 1000;
@@ -17,5 +20,3 @@ function lastTime(time) {
     result = `${Math.floor(IntervalMinute / 60 / 60 / 24)} days ago`;
   return result;
 }
-
-export default lastTime;
