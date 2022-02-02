@@ -12,11 +12,14 @@
       background-image: url('../assets/logo.svg');
       background-repeat: no-repeat;
       background-position: 0 center;
-      font-size: 2rem;
-      color: #fff;
-      padding-left: 27px;
-      text-transform: capitalize;
       padding-top: 3px;
+      a {
+        font-size: 2rem;
+        color: #fff;
+        padding-left: 27px;
+        text-transform: capitalize;
+        text-decoration: none;
+      }
     }
     .utils {
       %button {

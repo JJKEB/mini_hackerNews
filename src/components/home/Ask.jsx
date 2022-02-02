@@ -1,18 +1,19 @@
 import React, { useState, useCallback } from 'react';
+import AskItem from './AskItem';
 import style from '../../scss/home.module.scss';
-import TopItem from './TopItem';
 import useGetData from '../../lib/useGetData';
-import Slider from 'react-slick';
+import { randomNum } from '../../lib/utils';
 import _ from 'lodash';
 
-const Top = ({ type, id }) => {
+const Ask = ({ type, id }) => {
   const [data, setData] = useState({
-    limit: 15, // 랜더링할 갯수
+    limit: 5, // 랜더링할 갯수
     loaded: 0, // 랜더링한 갯수
-    searchTime: 0, // api 조회한 시간
+    searchTime: 0, // Api 조회한 시간
     dataAll: [], // 받은 데이터 전부
     showList: [], // 받은 데이터중 보여줄 데이터
     showItems: [], // 로드된 각 아이템 값들
+    reRoadTime: 0, // reRoad 시간 초단위
   });
 
   const onAddList = useCallback((lists) => {
@@ -34,19 +35,26 @@ const Top = ({ type, id }) => {
     });
   }, []);
 
-  const settings = {
-    className: 'today-top-content',
-    centerMode: true,
-    infinite: false,
-    arrows: false,
-    centerPadding: '0',
-    slidesToShow: 1,
-    speed: 500,
-    rows: 5,
-    dots: true,
-    slidesPerRow: 1,
-    slidesToScroll: 1,
-  };
+  // 중복 되지 않게 정해진 갯수만큼 id를 랜덤으로 뽑아 갱신
+  const onReload = useCallback((data) => {
+    const currentTime = new Date().getTime() / 1000;
+    const flowTime = Math.floor(currentTime - data.reRoadTime);
+    if (flowTime < 10) return alert('10초에 한번 갱신가능합니다.');
+
+    setData((data) => {
+      const nums = [];
+      while (nums.length < data.limit) {
+        const num = randomNum(0, data.dataAll.length - 1);
+        if (nums.indexOf(data.dataAll[num]) < 0) {
+          nums.push(data.dataAll[num]);
+        }
+      }
+      const newData = _.cloneDeep(data);
+      newData.showList = nums;
+      newData.reRoadTime = currentTime;
+      return newData;
+    });
+  }, []);
 
   const [loading, resolved, error] = useGetData(type, id, onAddList);
   if (loading) return null;
@@ -56,24 +64,14 @@ const Top = ({ type, id }) => {
   return (
     <section className={style.section}>
       <div className={style.head}>
-        <h2>Today's top</h2>
-        <span className={style.uptime}>{data.searchTime}:00</span>
+        <h2>Today's Ask</h2>
+        <button className={style.reload} onClick={() => onReload(data)} />
       </div>
-      <div className={style.contents}>
-        <Slider {...settings}>
-          {data.showList.map((id, i) => (
-            <TopItem
-              key={id}
-              type={'item'}
-              id={id}
-              index={i}
-              onAdd={onAddItems}
-            />
-          ))}
-        </Slider>
-      </div>
+      {data.showList.map((id) => (
+        <AskItem key={id} type={'item'} id={id} onAdd={onAddItems} />
+      ))}
     </section>
   );
 };
 
-export default React.memo(Top);
+export default React.memo(Ask);

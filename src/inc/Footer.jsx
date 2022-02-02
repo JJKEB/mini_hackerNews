@@ -7,7 +7,7 @@ const FooterBlock = styled.footer`
 `;
 
 const Footer = () => {
-  return <FooterBlock />;
+  return <FooterBlock className="footer" />;
 };
 
 export default Footer;

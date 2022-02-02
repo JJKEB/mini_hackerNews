@@ -39,7 +39,7 @@ const New = ({ type, id }) => {
   const onReload = useCallback((data) => {
     const currentTime = new Date().getTime() / 1000;
     const flowTime = Math.floor(currentTime - data.reRoadTime);
-    if (flowTime < 180) return alert('can renew it once every 3 minutes.');
+    if (flowTime < 10) return alert('10초에 한번 갱신가능합니다.');
 
     setData((data) => {
       const nums = [];
@@ -56,25 +56,22 @@ const New = ({ type, id }) => {
     });
   }, []);
 
-  const cliee = () => {
-    console.log(data);
-  };
-
   const [loading, resolved, error] = useGetData(type, id, onAddList);
   if (loading) return null;
   if (error) return console.log('에러발생');
   if (!resolved) return null;
 
   return (
-    <section className={`${style.section} ${style.new}`}>
-      <div className="sec-head">
+    <section className={style.section}>
+      <div className={style.head}>
         <h2>Today's New</h2>
-        <button onClick={() => onReload(data)}>새로고침</button>
+        <button className={style.reload} onClick={() => onReload(data)} />
       </div>
-      <button onClick={cliee}>test</button>
-      {data.showList.map((id, i) => (
-        <NewItem key={id} type={'item'} id={id} index={i} onAdd={onAddItems} />
-      ))}
+      <div className={style.contents}>
+        {data.showList.map((id) => (
+          <NewItem key={id} type={'item'} id={id} onAdd={onAddItems} />
+        ))}
+      </div>
     </section>
   );
 };

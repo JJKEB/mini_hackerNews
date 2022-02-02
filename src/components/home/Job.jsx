@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import ShowItem from './ShowItem';
+import JobItem from './JobItem';
 import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-const Show = ({ type, id }) => {
+const Job = ({ type, id }) => {
   const [data, setData] = useState({
     limit: 5, // 랜더링할 갯수
     loaded: 0, // 랜더링한 갯수
@@ -68,12 +68,12 @@ const Show = ({ type, id }) => {
   if (!resolved) return null;
 
   return (
-    <section className={`${style.section} ${style.full} ${style.show}`}>
+    <section className={`${style.section} ${style.full} ${style.job}`}>
       <div className={style.head}>
-        <h2>Today's Show</h2>
+        <h2>Today's Job</h2>
         <button className={style.reload} onClick={() => onReload(data)} />
       </div>
-      <div className={style['show--contents']}>
+      <div className={style['job--contents']}>
         <Swiper
           slidesPerView={2}
           spaceBetween={16}
@@ -82,7 +82,7 @@ const Show = ({ type, id }) => {
         >
           {data.showList.map((id) => (
             <SwiperSlide key={id}>
-              <ShowItem type={'item'} id={id} onAdd={onAddItems} />
+              <JobItem type={'item'} id={id} onAdd={onAddItems} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -91,4 +91,4 @@ const Show = ({ type, id }) => {
   );
 };
 
-export default React.memo(Show);
+export default React.memo(Job);

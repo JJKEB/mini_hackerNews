@@ -22,9 +22,24 @@
     justify-content: space-between;
     margin-bottom: 20px;
     h2 {
+      position: relative;
       font-size: 2.4rem;
       font-weight: 700;
       color: var(--home-sec-title);
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -18px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        margin-top: -3px;
+        // background-color: #202020;
+        border-top: 3px solid var(--home-sec-title-arrow);
+        border-right: 3px solid var(--home-sec-title-arrow);
+        transform: rotate(45deg);
+      }
     }
     .uptime {
       position: relative;
@@ -50,27 +65,41 @@
       }
     }
     .reload {
+      width: 24px;
+      height: 24px;
+      background-image: url('../assets/ico_reload.svg');
+      background-repeat: no-repeat;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
     }
   }
 
   .contents {
-    // background: #ffffff;
     background-color: var(--home-top-item-bg);
     box-shadow: var(--home-sec-itemShadow);
     border-radius: 8px;
+  }
+
+  &.full {
+    padding: 40px 0 70px;
+    .head {
+      padding: 0 20px;
+    }
   }
 }
 
 .top-item {
   display: flex;
-  padding: 16px 14px;
+  padding: 16px 15px;
   .top--num {
-    width: 47px;
+    width: 42px;
     font-size: 2.4rem;
     font-weight: bold;
     color: var(--theme-color);
   }
   .top--content {
+    flex: 1 1;
     > a {
       text-decoration: none;
     }
@@ -86,6 +115,226 @@
       color: #727272;
       span {
         margin-right: 8px;
+      }
+    }
+  }
+}
+
+.new-item {
+  padding: 0 15px;
+  .new-item--inner {
+    border-top: 1px solid #e4e4e4;
+    padding: 14px 0;
+    > a {
+      display: block;
+      text-decoration: none;
+    }
+    .new-item--time {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(76, 165, 196, 0.15);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #4ca5c4;
+      padding: 0 7px;
+      height: 19px;
+      margin-bottom: 9px;
+    }
+    strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--home-top-item-title);
+      margin-bottom: 14px;
+    }
+    .new-itme--by {
+      background-image: url('../assets/ico_profile.svg');
+      background-repeat: no-repeat;
+      background-position: 0 center;
+      padding-left: 19px;
+      font-size: 1.2rem;
+      color: #727272;
+      font-weight: 500;
+    }
+  }
+  &:first-child {
+    .new-item--inner {
+      border-top: 0;
+    }
+  }
+}
+
+.show {
+  .show--contents {
+    display: flex;
+  }
+  .show-item {
+    padding-left: 20px;
+    height: 100%;
+    .show-item--inner {
+      display: flex;
+      flex-wrap: wrap;
+      height: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      > a {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        background-color: #eaf4f8;
+        padding: 16px 12px;
+        text-decoration: none;
+        box-sizing: border-box;
+        .domain {
+          background-color: #f49664;
+          font-size: 1rem;
+          font-weight: 500;
+          display: inline-flex;
+          height: 20px;
+          align-items: center;
+          padding: 0 7px;
+          border-radius: 10px;
+          color: #fff;
+          margin-bottom: 6px;
+        }
+        .show--title {
+          display: block;
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: #000;
+          margin-bottom: 14px;
+          @include multiLine(4);
+        }
+        .show--bottom {
+          width: 100%;
+          align-self: flex-end;
+        }
+        .show--details {
+          border-bottom: 1px solid #e3e6e8;
+          padding-bottom: 15px;
+          margin-bottom: 15px;
+          .show--point {
+            font-size: 1.2rem;
+            color: #727272;
+            font-weight: 400;
+            margin-right: 10px;
+            padding-left: 20px;
+            background-image: url('../assets/ico_point.svg');
+            background-repeat: no-repeat;
+            background-position: 0 center;
+          }
+          .show--time {
+            font-size: 1.2rem;
+            color: #727272;
+            font-weight: 400;
+            padding-left: 20px;
+            background-image: url('../assets/ico_time.svg');
+            background-repeat: no-repeat;
+            background-position: 0 center;
+          }
+        }
+        .show--user {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .show--by {
+            font-size: 1.2rem;
+            color: #727272;
+            font-weight: 500;
+            padding: 2px 0 2px 20px;
+            background-image: url('../assets/ico_profile.svg');
+            background-repeat: no-repeat;
+            background-position: 0 center;
+          }
+          .show--descendants {
+            font-size: 1.2rem;
+            color: var(--theme-color);
+            font-weight: 500;
+            padding: 2px 0 2px 20px;
+            background-image: url('../assets/ico_comment.svg');
+            background-repeat: no-repeat;
+            background-position: 0 center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ask-item {
+  .ask-item--inner {
+    background-color: var(--home-top-item-bg);
+    box-shadow: var(--home-sec-itemShadow);
+    padding: 14px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--home-top-item-title);
+      @include multiLine(2);
+    }
+  }
+}
+
+.job {
+  .job--contents {
+    display: flex;
+  }
+  .job-item {
+    padding-left: 20px;
+    height: 100%;
+    .job-item--inner {
+      display: flex;
+      flex-wrap: wrap;
+      height: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      > a {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        background-color: #eaf4f8;
+        padding: 16px 12px;
+        text-decoration: none;
+        box-sizing: border-box;
+        // .domain {
+        //   background-color: #f49664;
+        //   font-size: 1rem;
+        //   font-weight: 500;
+        //   display: inline-flex;
+        //   height: 20px;
+        //   align-items: center;
+        //   padding: 0 7px;
+        //   border-radius: 10px;
+        //   color: #fff;
+        //   margin-bottom: 6px;
+        // }
+        .job--title {
+          display: block;
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: #000;
+          margin-bottom: 14px;
+          @include multiLine(4);
+        }
+        .job--bottom {
+          width: 100%;
+          align-self: flex-end;
+        }
+        .job--details {
+          .job--time {
+            font-size: 1.2rem;
+            color: #727272;
+            font-weight: 400;
+            padding-left: 20px;
+            background-image: url('../assets/ico_time.svg');
+            background-repeat: no-repeat;
+            background-position: 0 center;
+          }
+        }
       }
     }
   }
