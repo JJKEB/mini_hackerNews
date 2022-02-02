@@ -147,6 +147,9 @@
       font-weight: 700;
       color: var(--home-top-item-title);
       margin-bottom: 14px;
+      > span {
+        color: var(--theme-color);
+      }
     }
     .new-itme--by {
       background-image: url('../assets/ico_profile.svg');
@@ -205,6 +208,9 @@
           color: #000;
           margin-bottom: 14px;
           @include multiLine(4);
+          > span {
+            color: var(--theme-color);
+          }
         }
         .show--bottom {
           width: 100%;
@@ -275,6 +281,9 @@
       font-weight: 700;
       color: var(--home-top-item-title);
       @include multiLine(2);
+      > span {
+        color: var(--theme-color);
+      }
     }
   }
 }

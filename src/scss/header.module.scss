@@ -2,6 +2,8 @@
 @import 'lib/setting'; // SASS framework & setting
 
 .header {
+  position: relative;
+  z-index: 1;
   transition: 0.5s;
   background-color: var(--theme-bg);
   .bar {
@@ -41,6 +43,10 @@
         background-position: -32px 0;
       }
     }
+  }
+
+  &.active {
+    box-shadow: var(--home-sec-itemShadow);
   }
 }
 

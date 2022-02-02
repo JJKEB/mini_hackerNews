@@ -1,5 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+gsap.registerPlugin(ScrollToPlugin);
 
 const FooterBlock = styled.footer`
   /* background-color: #ed702d; */
@@ -7,7 +9,13 @@ const FooterBlock = styled.footer`
 `;
 
 const Footer = () => {
-  return <FooterBlock className="footer" />;
+  return (
+    <FooterBlock className="footer">
+      <button onClick={() => gsap.to(window, { duration: 0.5, scrollTo: 0 })}>
+        UP
+      </button>
+    </FooterBlock>
+  );
 };
 
 export default Footer;

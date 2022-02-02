@@ -1,6 +1,7 @@
 import React from 'react';
 import useGetData from '../../lib/useGetData';
 import style from '../../scss/home.module.scss';
+import { txtSplit } from '../../lib/utils';
 
 const AskItem = ({ type, id, onAdd }) => {
   const [loading, resolved, error] = useGetData(type, id, onAdd);
@@ -13,7 +14,7 @@ const AskItem = ({ type, id, onAdd }) => {
   return (
     <div className={style['ask-item']}>
       <div className={style['ask-item--inner']}>
-        <strong>{title}</strong>
+        <strong>{txtSplit(title, 'HN:')}</strong>
       </div>
     </div>
   );

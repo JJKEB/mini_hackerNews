@@ -11,8 +11,6 @@ const JobItem = ({ type, id, onAdd }) => {
 
   const { title, time, url } = resolved;
 
-  console.log(resolved);
-
   return (
     <div className={style['job-item']}>
       <div className={style['job-item--inner']}>

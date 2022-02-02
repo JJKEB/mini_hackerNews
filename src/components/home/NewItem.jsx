@@ -1,6 +1,6 @@
 import React from 'react';
 import useGetData from '../../lib/useGetData';
-import { lastTime } from '../../lib/utils';
+import { lastTime, txtSplit } from '../../lib/utils';
 import style from '../../scss/home.module.scss';
 
 const NewItem = ({ type, id, onAdd }) => {
@@ -18,7 +18,7 @@ const NewItem = ({ type, id, onAdd }) => {
           {time !== undefined && (
             <span className={style['new-item--time']}>{lastTime(time)}</span>
           )}
-          <strong>{title}</strong>
+          <strong>{txtSplit(title, 'HN:')}</strong>
           <span className={style['new-itme--by']}>{by}</span>
         </a>
       </div>

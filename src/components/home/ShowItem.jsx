@@ -1,6 +1,6 @@
 import React from 'react';
 import useGetData from '../../lib/useGetData';
-import { lastTime } from '../../lib/utils';
+import { lastTime, txtSplit, isDomain } from '../../lib/utils';
 import style from '../../scss/home.module.scss';
 
 const ShowItem = ({ type, id, onAdd }) => {
@@ -15,8 +15,10 @@ const ShowItem = ({ type, id, onAdd }) => {
     <div className={style['show-item']}>
       <div className={style['show-item--inner']}>
         <a href={url} target="_blank" rel="noopener noreferrer">
-          {url && <span className={style['domain']}>{url}</span>}
-          <strong className={style['show--title']}>{title}</strong>
+          {url && <span className={style['domain']}>{isDomain(url)}</span>}
+          <strong className={style['show--title']}>
+            {txtSplit(title, 'HN:')}
+          </strong>
           <div className={style['show--bottom']}>
             <div className={style['show--details']}>
               <span className={style['show--point']}>{score}</span>

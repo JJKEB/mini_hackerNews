@@ -20,3 +20,25 @@ export function lastTime(time) {
     result = `${Math.floor(IntervalMinute / 60 / 60 / 24)} days ago`;
   return result;
 }
+
+export const txtSplit = (txt, ref) => {
+  const text = txt;
+  if (text.includes(ref)) {
+    const textArr = text.split(ref);
+    return (
+      <>
+        <span>{`${textArr[0]}${ref}`}</span> {`${textArr[1]}`}
+      </>
+    );
+  } else {
+    return txt;
+  }
+};
+
+export const isDomain = (strUrl) => {
+  const stringUrl = strUrl;
+  const urlObj = new URL(stringUrl);
+  return urlObj.host.includes('www.')
+    ? urlObj.host.split('www.')[1]
+    : urlObj.host;
+};

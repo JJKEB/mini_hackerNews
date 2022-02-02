@@ -7,7 +7,6 @@ import Header from './inc/Header';
 import Footer from './inc/Footer';
 import Home from './pages/Home';
 import Top from './pages/Top';
-
 import './scss/style.scss';
 
 function App() {
