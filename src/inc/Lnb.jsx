@@ -1,12 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import style from '../scss/header.module.scss';
 
-const Nav = styled.nav`
-  background-color: #ed702d;
-`;
-
-const Header = () => {
-  return <Nav>nav</Nav>;
+const Lnb = () => {
+  return (
+    <nav className={style.lnb}>
+      <ul>
+        <li>
+          <NavLink to="/">
+            <span>Home</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/top">
+            <span>Top</span>
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
-export default Header;
+export default Lnb;

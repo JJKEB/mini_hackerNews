@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import style from '../../scss/home.module.scss';
 import TopItem from './TopItem';
 import useGetData from '../../lib/useGetData';
 import Slider from 'react-slick';
@@ -37,6 +38,7 @@ const Top = ({ type, id }) => {
     className: 'today-top-content',
     centerMode: true,
     infinite: false,
+    arrows: false,
     centerPadding: '0',
     slidesToShow: 1,
     speed: 500,
@@ -46,9 +48,9 @@ const Top = ({ type, id }) => {
     slidesToScroll: 1,
   };
 
-  const cliee = () => {
-    console.log(data);
-  };
+  // const cliee = () => {
+  //   console.log(data);
+  // };
 
   const [loading, resolved, error] = useGetData(type, id, onAddList);
   if (loading) return null;
@@ -56,23 +58,25 @@ const Top = ({ type, id }) => {
   if (!resolved) return null;
 
   return (
-    <section className="today-top">
-      <div className="sec-head">
+    <section className={`${style.section} ${style.top}`}>
+      {/* <button onClick={cliee}>test</button> */}
+      <div className={style.head}>
         <h2>Today's top</h2>
-        <span className="up-time">{data.searchTime}:00</span>
+        <span className={style.uptime}>{data.searchTime}:00</span>
       </div>
-      <button onClick={cliee}>test</button>
-      <Slider {...settings}>
-        {data.showList.map((id, i) => (
-          <TopItem
-            key={id}
-            type={'item'}
-            id={id}
-            index={i}
-            onAdd={onAddItems}
-          />
-        ))}
-      </Slider>
+      <div className={style.contents}>
+        <Slider {...settings}>
+          {data.showList.map((id, i) => (
+            <TopItem
+              key={id}
+              type={'item'}
+              id={id}
+              index={i}
+              onAdd={onAddItems}
+            />
+          ))}
+        </Slider>
+      </div>
     </section>
   );
 };

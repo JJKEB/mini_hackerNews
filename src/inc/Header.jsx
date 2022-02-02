@@ -1,17 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
 import Lnb from './Lnb';
+import style from '../scss/header.module.scss';
 
-const HeaderBlock = styled.header`
-  background-color: #ed702d;
-`;
-
-const Header = () => {
+const Header = ({ onChangeTheme }) => {
   return (
-    <HeaderBlock>
-      <h1>svelte Hacker news</h1>
+    <header className={style.header}>
+      <div className={style.bar}>
+        <h1>svelte Hacker news</h1>
+        <div className={style.utils}>
+          <button
+            className={style.theme}
+            onClick={onChangeTheme}
+            aria-label="테마컬러변경"
+          />
+          <button className={style.qna} aria-label="Qna" />
+        </div>
+      </div>
       <Lnb />
-    </HeaderBlock>
+    </header>
   );
 };
 

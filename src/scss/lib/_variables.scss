@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+// --------------
+//    공통 변수
+// --------------
+
+// * ----- 576 ----- *
+$col-xs: max-width 575px; // 575미만                 _ bt5 col-
+$col-sm: 576px; // 576이상                 _ bt5 col-sm
+$col-sm-md: 576px 767px; // 576 ~ 767
+$col-sm-lg: 576px 991px; // 576 ~ 991
+$col-sm-xl: 576px 1199px; // 576 ~ 1199
+
+// * ----- 768 ----- *
+$col-md-lt: max-width 767px; // 768미만  _ bt3 col-xs
+$col-md: 768px; // 768이상  _ bt3 col-sm   _ bt5 col-md
+$col-md-lg: 768px 991px; // 768 ~ 991
+$col-md-xl: 768px 1199px; // 768 ~ 1199
+
+// * ----- 992 ----- *
+$col-lg-lt: max-width 991px; // 991미만
+$col-lg: 992px; // 992이상  _ bt3 col-md   _ bt5 col-lg
+$col-lg-xl: 992px 1199px; // 992 ~ 1199
+
+// * ----- 1200 ----- *
+$col-xl-lt: max-width 1199px; // 1199미만
+$col-xl: 1200px; // 1200이상 _ bt3 col-lg   _ bt5 col-xl
+$col-xxl: 1400px; // 1400이상                _ bt5 col-xxl
+
+$themeColor: #ed702d;
+
+:export {
+  themeColor: $themeColor;
+}
+
+.light {
+  --theme-color: #ed702d;
+  --theme-bg: #ed702d;
+
+  --lnb-bg: #fff;
+  --lnb-active-color: #000;
+
+  --home-sec-bg: #fff;
+  --home-sec-title: #202020;
+  --home-sec-item: #fff;
+  --home-sec-itemShadow: 0px 2px 4px rgba(0, 0, 0, 0.1),
+    0px 3px 6px rgba(0, 0, 0, 0.05);
+  --home-sec-bar: #f5f5f5;
+
+  --home-top-item-title: #202020;
+  --home-top-item-bg: #fff;
+}
+
+.dark {
+  --theme-color: #ed702d;
+  --theme-bg: #292c33;
+
+  --lnb-bg: #292c33;
+  --lnb-active-color: #fff;
+
+  --home-sec-bg: #292c33;
+  --home-sec-title: #fff;
+  --home-sec-item: #343538;
+  --home-sec-itemShadow: 0px 2px 6px rgba(0, 0, 0, 0.1),
+    0px 6px 8px rgba(0, 0, 0, 0.2);
+  --home-sec-bar: #35383c;
+
+  --home-top-item-title: #fff;
+  --home-top-item-bg: #343538;
+}

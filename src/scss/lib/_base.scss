@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+/**
+ * ----------------------------------------
+ *     Base
+ * ----------------------------------------
+ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+body,
+button,
+a {
+  font-family: 'Roboto', sans-serif;
+  color: #202020;
+}
+
+// 이미지 대체
+.ir {
+  overflow: hidden;
+  text-indent: -9999em;
+}
+// 스크린리더/브라우저에서 모두 감추기
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+// 스크린리더에서는 읽기 가능
+.acc-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+// 스크린리더에서는 읽기 가능 + 포커스 적용
+.acc-hidden.focusable:active,
+.acc-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.blind {
+  visibility: hidden;
+  position: absolute;
+  top: -10000px;
+  height: 1px;
+  width: 1px;
+}
+.noneSelect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.multi-line1 {
+  @include multiLine(1);
+}
+
+.multi-line2 {
+  @include multiLine(2);
+}

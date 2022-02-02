@@ -1,0 +1,299 @@
+@charset "utf-8";
+
+// -------------------
+// sass mixin
+// -------------------
+
+@mixin align-container() {
+  max-width: $layout_maxW;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// rowgap 부트스트랩 gap 설정
+@mixin rowgap($value, $type: 'lr') {
+  @if $type == 'all' {
+    margin: -$value/2;
+  } @else {
+    margin-left: -$value/2;
+    margin-right: -$value/2;
+  }
+  > [class*='col'] {
+    @if $type == 'all' {
+      padding: $value/2;
+    } @else {
+      padding-left: $value/2;
+      padding-right: $value/2;
+    }
+  }
+}
+
+@mixin crossX($width: 2.3rem, $height: 0.1rem, $color: #fff) {
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $width;
+    height: $height;
+    background-color: $color;
+    margin-left: -$width / 2;
+    margin-top: -$height / 2;
+  }
+  &::before {
+    @include transform(rotate(45deg));
+  }
+  &::after {
+    @include transform(rotate(-45deg));
+  }
+}
+
+@mixin symbol(
+  $size: 25px,
+  $value: 'minus',
+  $barWidth: 0.9rem,
+  $bgColor: #fff,
+  $barColor: #7a7a7a
+) {
+  width: $size;
+  height: $size;
+  background-color: $bgColor;
+  text-indent: -9999px;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: $barWidth;
+    height: 0.1rem;
+    background-color: $barColor;
+    left: 50%;
+    top: 50%;
+    margin-top: -0.05rem;
+    margin-left: -$barWidth / 2;
+  }
+
+  @if $value == 'plus' {
+    &:after {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+@mixin fontawesome4($value) {
+  content: $value;
+  display: inline-block;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'FontAwesome';
+}
+
+@mixin fontawesome5($value) {
+  content: $value;
+  display: inline-block;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Font Awesome 5 Free';
+}
+
+// opacity
+@mixin opacity($value) {
+  -webkit-opacity: $value;
+  -khtml-opacity: $value;
+  -moz-opacity: $value;
+  opacity: $value;
+  $IEValue: $value * 100;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=' + $IEValue +
+    ')';
+  filter: alpha(opacity=$IEValue);
+}
+
+// 박스 그림자
+@mixin box-shadow($param: #000 2px 2px 1px) {
+  -webkit-box-shadow: $param;
+  -moz-box-shadow: $param;
+  box-shadow: $param;
+}
+
+// RGBA 크로스브라우징
+@mixin rgba($hexcolor: #000, $rgbcolor: rgba(0, 0, 0, 0.8), $value: 0.8) {
+  background-color: $hexcolor;
+  $ie-value: $value * 100;
+  filter: alpha(opacity=$ie-value);
+  background-color: $rgbcolor;
+}
+// RGBA 크로스브라우징 (블랙,그레이,화이트)
+@mixin rgba-b($hexcolor: #000, $rgbcolor: rgba(0, 0, 0, 0.5), $value: 0.5) {
+  background-color: $hexcolor;
+  $ie-value: $value * 100;
+  filter: alpha(opacity=$ie-value);
+  background-color: $rgbcolor;
+  .ie8 & {
+    background: url(../img/bg/bg-rgba-black.png) 0 0 repeat;
+  }
+}
+
+// 멀티 라인 글 줄임 - 예전꺼
+@mixin multiLine_ellipsis($line_H: 1.5, $lineNum: 2) {
+  line-height: $line_H;
+  //white-space: pre;                      // CSS2.0 browsers
+  //white-space: pre-wrap;                 // CSS2.1 browsers
+  white-space: pre-line; // CSS3 and CSS2.1
+  white-space: -moz-pre-wrap !important; // 1999+ Mozilla
+  white-space: -hp-pre-wrap; // for HP printers
+  white-space: -o-pre-wrap; // Opera 7 and up
+  white-space: -pre-wrap; // Opera 4 thru 6
+  word-wrap: break-word; // IE 5.5+ and up
+  _white-space: pre; // restate for IE
+  overflow-x: auto; // Firefox 2 only
+  // width: 99%;                        // only if needed
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lineNum;
+  -webkit-box-orient: vertical;
+  //max-height: $line_H * $lineNum;  // webkit 미적용시 높이값지정  line-height(60) x  -webkit-line-clamp(2) = 120
+}
+
+// 멀티 라인 글 줄임 - 211226 갱신
+@mixin multiLine($lineNum: 1, $line_H: 1.5) {
+  overflow: hidden; // 말줄임 공통
+  text-overflow: ellipsis;
+  @if $lineNum == 1 {
+    // 1줄 일때
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lineNum; // 두 줄 이상
+    -webkit-box-orient: vertical;
+
+    // IE 11 대응
+    line-height: $line_H + em;
+    max-height: $lineNum * $line_H + em; // 두 줄 이상
+  }
+}
+
+// http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@function parseInt($n) {
+  // 2
+  @return $n / ($n * 0 + 1);
+}
+@mixin rem($property, $values) {
+  $px: (); // 3
+  $rem: (); // 3
+
+  @each $value in $values {
+    // 4
+
+    @if $value == 0 or $value == auto {
+      // 5
+      $px: append($px, $value);
+      $rem: append($rem, $value);
+    } @else {
+      $unit: unit($value); // 6
+      $val: parseInt($value); // 6
+
+      @if $unit == 'px' {
+        // 7
+        $px: append($px, $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == 'rem' {
+        // 7
+        $px: append($px, ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {
+    // 8
+    #{$property}: $px; // 9
+  } @else {
+    #{$property}: $px; // 9
+    #{$property}: $rem; // 9
+  }
+}
+
+// 세로 풀 mixin
+// --------------------
+@mixin height_full() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  > span {
+    display: table;
+    width: 100%;
+    height: 100%;
+    > span {
+      display: table-cell;
+      vertical-align: middle;
+      box-sizing: border-box;
+      padding-left: 10px;
+      padding-right: 5px;
+    }
+  }
+}
+
+//  *  반응형 폰트사이즈
+//  *  Rem 속성 사용 = rem() 혼합
+//  * ----------------------------
+//  * 변수 설정예
+//  *  $p-font-sizes: (
+//       null  : 15px,
+//       480px : 16px,
+//       640px : 17px,
+//       1024px: 19px
+//     );
+//  *
+//  * 사용예
+//  * @include font-size($p-font-sizes);
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      @include rem(font-size, $fs-font-size);
+      // font-size: $fs-font-size;
+    } @else {
+      @media (min-width: $fs-breakpoint) {
+        @include rem(font-size, $fs-font-size);
+        // font-size: $fs-font-size;
+      }
+    }
+  }
+}
+
+@mixin main-section-common {
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  .title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 300;
+    span {
+      position: relative;
+      box-sizing: border-box;
+      padding-bottom: 10px;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 50px;
+        height: 1px;
+        margin-left: -25px;
+        background-color: #ccc;
+      }
+    }
+  }
+}

@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterBlock = styled.footer`
-  background-color: #ed702d;
+  /* background-color: #ed702d; */
+  height: 50px;
 `;
 
 const Footer = () => {
-  return <FooterBlock>footer</FooterBlock>;
+  return <FooterBlock />;
 };
 
 export default Footer;

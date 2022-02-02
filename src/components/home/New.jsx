@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import NewItem from './NewItem';
+import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
 import _ from 'lodash';
@@ -65,7 +66,7 @@ const New = ({ type, id }) => {
   if (!resolved) return null;
 
   return (
-    <section className="today-new">
+    <section className={`${style.section} ${style.new}`}>
       <div className="sec-head">
         <h2>Today's New</h2>
         <button onClick={() => onReload(data)}>새로고침</button>
