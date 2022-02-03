@@ -5,6 +5,7 @@ import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import _ from 'lodash';
+import icoReload from '../../assets/ico_reload.svg';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -71,7 +72,9 @@ const Show = ({ type, id }) => {
     <section className={`${style.section} ${style.full} ${style.show}`}>
       <div className={style.head}>
         <h2>Today's Show</h2>
-        <button className={style.reload} onClick={() => onReload(data)} />
+        <button className={style.reload} onClick={() => onReload(data)}>
+          <img src={icoReload} alt="" />
+        </button>
       </div>
       <div className={style['show--contents']}>
         <Swiper

@@ -4,6 +4,7 @@ import TopItem from './TopItem';
 import useGetData from '../../lib/useGetData';
 import Slider from 'react-slick';
 import _ from 'lodash';
+import icoClock from '../../assets/bx_bx-time.svg';
 
 const Top = ({ type, id }) => {
   const [data, setData] = useState({
@@ -57,7 +58,10 @@ const Top = ({ type, id }) => {
     <section className={style.section}>
       <div className={style.head}>
         <h2>Today's top</h2>
-        <span className={style.uptime}>{data.searchTime}:00</span>
+        <span className={style.uptime}>
+          <img src={icoClock} alt="" />
+          {data.searchTime}:00
+        </span>
       </div>
       <div className={style.contents}>
         <Slider {...settings}>

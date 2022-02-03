@@ -1,6 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
-
 import React, { useCallback, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './inc/Header';
@@ -17,7 +14,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className={`wrap ${theme}`}>
+      <div id="wrap" className={`wrap ${theme}`}>
         <Header onChangeTheme={onChangeTheme} />
         <Routes>
           <Route path="/top" element={<Top />} />

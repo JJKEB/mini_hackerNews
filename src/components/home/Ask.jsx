@@ -4,6 +4,7 @@ import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
 import _ from 'lodash';
+import icoReload from '../../assets/ico_reload.svg';
 
 const Ask = ({ type, id }) => {
   const [data, setData] = useState({
@@ -65,7 +66,9 @@ const Ask = ({ type, id }) => {
     <section className={style.section}>
       <div className={style.head}>
         <h2>Today's Ask</h2>
-        <button className={style.reload} onClick={() => onReload(data)} />
+        <button className={style.reload} onClick={() => onReload(data)}>
+          <img src={icoReload} alt="" />
+        </button>
       </div>
       {data.showList.map((id) => (
         <AskItem key={id} type={'item'} id={id} onAdd={onAddItems} />

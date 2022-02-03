@@ -2,6 +2,10 @@ import React from 'react';
 import useGetData from '../../lib/useGetData';
 import { lastTime, txtSplit, isDomain } from '../../lib/utils';
 import style from '../../scss/home.module.scss';
+import icoPoint from '../../assets/ico_point.svg';
+import icoTime from '../../assets/ico_time.svg';
+import icoBy from '../../assets/ico_profile.svg';
+import icoComment from '../../assets/ico_comment.svg';
 
 const ShowItem = ({ type, id, onAdd }) => {
   const [loading, resolved, error] = useGetData(type, id, onAdd);
@@ -21,14 +25,26 @@ const ShowItem = ({ type, id, onAdd }) => {
           </strong>
           <div className={style['show--bottom']}>
             <div className={style['show--details']}>
-              <span className={style['show--point']}>{score}</span>
+              <span className={style['show--point']}>
+                <img src={icoPoint} alt="" />
+                {score}
+              </span>
               {time !== undefined && (
-                <span className={style['show--time']}>{lastTime(time)}</span>
+                <span className={style['show--time']}>
+                  <img src={icoTime} alt="" />
+                  {lastTime(time)}
+                </span>
               )}
             </div>
             <div className={style['show--user']}>
-              <span className={style['show--by']}>{by}</span>
-              <span className={style['show--descendants']}>{descendants}</span>
+              <span className={style['show--by']}>
+                <img src={icoBy} alt="" />
+                {by}
+              </span>
+              <span className={style['show--descendants']}>
+                <img src={icoComment} alt="" />
+                {descendants}
+              </span>
             </div>
           </div>
         </a>

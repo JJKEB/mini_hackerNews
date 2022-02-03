@@ -11,36 +11,33 @@
     display: flex;
     justify-content: space-between;
     > h1 {
-      background-image: url('../assets/logo.svg');
-      background-repeat: no-repeat;
-      background-position: 0 center;
-      padding-top: 3px;
       a {
+        display: flex;
+        align-items: center;
         font-size: 2rem;
         color: #fff;
-        padding-left: 27px;
         text-transform: capitalize;
         text-decoration: none;
+        img {
+          margin-right: 2px;
+        }
       }
     }
     .utils {
       %button {
         width: 23px;
         height: 23px;
-        background-color: transparent;
         border: 0;
-        background-image: url('../assets/sprite_imgs.svg');
-        background-size: 400px;
+        padding: 0;
         margin-left: 8px;
+        background-color: transparent;
       }
       .theme {
         @extend %button;
-        background-position: 0 0;
         cursor: pointer;
       }
       .qna {
         @extend %button;
-        background-position: -32px 0;
       }
     }
   }

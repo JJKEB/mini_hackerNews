@@ -2,6 +2,7 @@ import React from 'react';
 import useGetData from '../../lib/useGetData';
 import { lastTime } from '../../lib/utils';
 import style from '../../scss/home.module.scss';
+import icoTime from '../../assets/ico_time.svg';
 
 const JobItem = ({ type, id, onAdd }) => {
   const [loading, resolved, error] = useGetData(type, id, onAdd);
@@ -20,7 +21,10 @@ const JobItem = ({ type, id, onAdd }) => {
           <div className={style['job--bottom']}>
             <div className={style['job--details']}>
               {time !== undefined && (
-                <span className={style['job--time']}>{lastTime(time)}</span>
+                <span className={style['job--time']}>
+                  <img src={icoTime} alt="" />
+                  {lastTime(time)}
+                </span>
               )}
             </div>
           </div>
