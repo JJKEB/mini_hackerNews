@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function useGetData(type, id, onAdd) {
+export default function useGetData(type, id, onAdd, loadCompletion) {
   const [loading, setLoading] = useState(false);
   const [resolved, setResolved] = useState(null);
   const [error, setError] = useState(null);
@@ -14,13 +14,14 @@ export default function useGetData(type, id, onAdd) {
       setLoading(true);
       try {
         const res = await axios.get(
-          `https://hacker-news.firebaseio.com/v0/${params}.json?print=pretty`,
+          `https://hacker-news.firebaseio.com/v0/${params}.json`,
           {
             cancelToken: request.token,
           },
         );
+
+        if (onAdd && !loadCompletion) onAdd(res.data);
         setResolved(res.data);
-        onAdd(res.data);
       } catch (e) {
         setError(e);
       }
@@ -28,6 +29,7 @@ export default function useGetData(type, id, onAdd) {
     };
     process();
     return () => {
+      setLoading(false);
       request.cancel('Axios request canceled.');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

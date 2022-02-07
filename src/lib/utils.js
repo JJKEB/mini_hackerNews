@@ -11,6 +11,7 @@ export function lastTime(time) {
   const currentMs = new Date().getTime();
   const IntervalMinute = (currentMs - oldMs) / 1000;
   let result = '';
+  console.log(IntervalMinute);
   if (IntervalMinute < 60) result = `${Math.floor(IntervalMinute)} seconds ago`;
   if (IntervalMinute >= 60 && IntervalMinute < 3600)
     result = `${Math.floor(IntervalMinute / 60)} minutes ago`;

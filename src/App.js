@@ -4,6 +4,11 @@ import Header from './inc/Header';
 import Footer from './inc/Footer';
 import Home from './pages/Home';
 import Top from './pages/Top';
+import User from './pages/User';
+import New from './pages/New';
+import Show from './pages/Show';
+import Ask from './pages/Ask';
+import Job from './pages/Job';
 import './scss/style.scss';
 
 function App() {
@@ -18,6 +23,15 @@ function App() {
         <Header onChangeTheme={onChangeTheme} />
         <Routes>
           <Route path="/top" element={<Top />} />
+          <Route path="/user" element={<User />}>
+            <Route path=":id" element={<User />} />
+          </Route>
+
+          <Route path="/new" element={<New />} />
+          <Route path="/Show" element={<Show />} />
+          <Route path="/Ask" element={<Ask />} />
+          <Route path="/Job" element={<Job />} />
+
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />
