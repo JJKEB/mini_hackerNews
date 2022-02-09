@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CardList from '../components/CardList';
 import Pageing from '../components/Pageing';
 import Align from '../components/Align';
+import Progress from '../components/Progress';
 
 const Job = () => {
   const [data, setData] = useState({
@@ -21,8 +22,10 @@ const Job = () => {
 
   return (
     <div className="cards-wrap">
-      {data.limit}
-      {data.loaded}
+      <Progress
+        active={true}
+        progress={Math.floor((data.loaded / data.limit) * 100)}
+      />
 
       {data.loadCompletion && (
         <Align setData={setData} setCurrentPageIng={setCurrentPageIng} />

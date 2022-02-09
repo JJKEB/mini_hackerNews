@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import useGetData from '../lib/useGetData';
 import CardItem from './CardItem';
 import _ from 'lodash';
+import style from '../scss/cards.module.scss';
 
 const CardList = ({ type, id, data, setData }) => {
   // Api 호출시 List 저장용
@@ -40,18 +41,13 @@ const CardList = ({ type, id, data, setData }) => {
     [setData],
   );
 
-  const dataiss = (data) => {
-    console.log(data);
-  };
-
   const [loading, resolved, error] = useGetData(type, id, onAddList);
   if (loading) return null;
   if (error) return console.log('에러발생');
   if (!resolved) return null;
 
   return (
-    <div>
-      <button onClick={() => dataiss(data)}>test</button>
+    <div className={style.cardList}>
       {data.showList.map((id, i) => (
         <CardItem
           key={id}

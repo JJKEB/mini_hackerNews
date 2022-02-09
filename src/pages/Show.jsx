@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardList from '../components/CardList';
 import Pageing from '../components/Pageing';
 import Align from '../components/Align';
+import Progress from '../components/Progress';
+import _ from 'lodash';
+import style from '../scss/cards.module.scss';
 
 const Show = () => {
   const [data, setData] = useState({
@@ -14,30 +17,53 @@ const Show = () => {
     showList: [], // 받은 데이터중 보여줄 데이터
     showItems: [], // 로드된 각 아이템 값들
     tempList: [], // pageing 용 임시 상태
+    userList: [], // user ( by ) 리스트
   });
 
   // pageing 위치 확인 상태
   const [currentPageIng, setCurrentPageIng] = useState(1);
 
-  return (
-    <div className="cards-wrap">
-      {data.limit}
-      {data.loaded}
+  // 정렬 스타일 상태
+  const [alignStyle, setAlignStyle] = useState(style.rowAlign);
 
-      {data.loadCompletion && (
-        <Align setData={setData} setCurrentPageIng={setCurrentPageIng} />
-      )}
+  // 로딩 완료시 user 리스트 추출
+  useEffect(() => {
+    if (data.loadCompletion) {
+      setData((data) => {
+        const newData = _.cloneDeep(data);
+        newData.userList = data.showItems.map((item) => item.by);
+        return newData;
+      });
+    }
+  }, [data.loadCompletion]);
+
+  return (
+    <div className={`${style.cardsWrap} ${alignStyle}`}>
+      <Progress
+        active={true}
+        progress={Math.floor((data.loaded / data.limit) * 100)}
+      />
+
+      {data.loadCompletion ? (
+        <>
+          <Align
+            setData={setData}
+            setCurrentPageIng={setCurrentPageIng}
+            setAlignStyle={setAlignStyle}
+          />
+        </>
+      ) : null}
 
       <CardList type="showstories" data={data} setData={setData} />
 
-      {data.loadCompletion && (
+      {data.loadCompletion ? (
         <Pageing
           data={data}
           setData={setData}
           currentPageIng={currentPageIng}
           setCurrentPageIng={setCurrentPageIng}
         />
-      )}
+      ) : null}
     </div>
   );
 };

@@ -14,13 +14,15 @@ import './scss/style.scss';
 function App() {
   const [theme, setTheme] = useState('light');
   const onChangeTheme = useCallback(() => {
-    setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+    setTheme((theme) => (theme === 'light' ? 'theme-dark' : 'light'));
   }, []);
+
+  const [path, setPath] = useState('');
 
   return (
     <BrowserRouter>
-      <div id="wrap" className={`wrap ${theme}`}>
-        <Header onChangeTheme={onChangeTheme} />
+      <div id="wrap" className={`${theme}${path !== '/' ? ' sub' : ''}`}>
+        <Header onChangeTheme={onChangeTheme} setPath={setPath} />
         <Routes>
           <Route path="/top" element={<Top />} />
           <Route path="/user" element={<User />}>

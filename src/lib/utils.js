@@ -10,16 +10,29 @@ export function lastTime(time) {
   const oldMs = time * 1000;
   const currentMs = new Date().getTime();
   const IntervalMinute = (currentMs - oldMs) / 1000;
+  const secondsTime = Math.floor(IntervalMinute);
+  const minutesTime = Math.floor(IntervalMinute / 60);
+  const hoursTime = Math.floor(IntervalMinute / 60 / 60);
+  const daysTime = Math.floor(IntervalMinute / 60 / 60 / 24);
+  const yearsTime = Math.floor(daysTime / 365);
+
   let result = '';
-  console.log(IntervalMinute);
-  if (IntervalMinute < 60) result = `${Math.floor(IntervalMinute)} seconds ago`;
+  if (IntervalMinute < 60) result = `${secondsTime} seconds`;
   if (IntervalMinute >= 60 && IntervalMinute < 3600)
-    result = `${Math.floor(IntervalMinute / 60)} minutes ago`;
+    result = `${minutesTime} minutes`;
   if (IntervalMinute >= 3600 && IntervalMinute < 86400)
-    result = `${Math.floor(IntervalMinute / 60 / 60)} hours ago`;
-  if (IntervalMinute >= 86400)
-    result = `${Math.floor(IntervalMinute / 60 / 60 / 24)} days ago`;
-  return result;
+    result = `${hoursTime} hours`;
+  if (daysTime >= 1 && daysTime < 365) result = `${daysTime} days`;
+  if (daysTime >= 365) result = `${yearsTime} years`;
+
+  return (
+    <>
+      {result}
+      <span className="tail" style={{ marginLeft: '4px' }}>
+        ago
+      </span>
+    </>
+  );
 }
 
 export const txtSplit = (txt, ref) => {

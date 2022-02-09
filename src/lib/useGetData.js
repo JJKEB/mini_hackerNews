@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+/**
+ * @param {*} type 호출 하고자 하는 타입 user, item, 등등 - [필수]
+ * @param {*} id 호출할 아이템의 아이디
+ * @param {*} onAdd 호출과 동시에 스테이스에 올릴 훅
+ * @param {*} loadCompletion 훅 재실행 방지용 state 값
+ * @returns
+ */
 export default function useGetData(type, id, onAdd, loadCompletion) {
   const [loading, setLoading] = useState(false);
   const [resolved, setResolved] = useState(null);

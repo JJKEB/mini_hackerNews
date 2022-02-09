@@ -1,7 +1,13 @@
 import React from 'react';
 import useGetData from '../lib/useGetData';
-import { txtSplit } from '../lib/utils';
-import { NavLink } from 'react-router-dom';
+import { txtSplit, lastTime, isDomain } from '../lib/utils';
+import { Link } from 'react-router-dom';
+import style from '../scss/cards.module.scss';
+
+import icoBy from '../assets/ico_profile.svg';
+import icoComment from '../assets/ico_comment.svg';
+import icoTime from '../assets/ico_time.svg';
+import icoPoint from '../assets/ico_point.svg';
 
 const CardItem = ({ type, id, onAdd, index, pageing, loadCompletion }) => {
   const [loading, resolved, error] = useGetData(
@@ -19,16 +25,35 @@ const CardItem = ({ type, id, onAdd, index, pageing, loadCompletion }) => {
   // 페이징 지정한 갯수만 랜더링
   if (index <= pageing) {
     return (
-      <div className="" style={{ borderBottom: '1px solid #333' }}>
-        <div className="">
-          <strong>{txtSplit(title, 'HN:')}</strong>
-          <div>
-            글쓴이 : <NavLink to={`/user/${by}`}>{by}</NavLink>
+      <div className={style.cardItemWrap}>
+        <div className={style.cardItem}>
+          <div className={style.inner}>
+            {url && <span className={style.domain}>{isDomain(url)}</span>}
+            <strong className={style.subject}>{txtSplit(title, 'HN:')}</strong>
+            <div className={style.infoWrap}>
+              <div className={style.infos}>
+                <Link className={style.by} to={`/user/${by}`}>
+                  <img src={icoBy} alt="" />
+                  {by}
+                </Link>
+                <div className={style.createInfo}>
+                  <span className={style.score}>
+                    <img src={icoPoint} alt="" /> {score} points
+                  </span>
+                  <span className={style.time}>
+                    <img src={icoTime} alt="" />
+                    {lastTime(time)}
+                  </span>
+                </div>
+              </div>
+              {descendants > 0 && (
+                <div className={style.comment}>
+                  <img src={icoComment} alt="" />
+                  {descendants}
+                </div>
+              )}
+            </div>
           </div>
-          <div>{time}</div>
-          <div>{score}</div>
-          <div>{descendants}</div>
-          <div>{url}</div>
         </div>
       </div>
     );

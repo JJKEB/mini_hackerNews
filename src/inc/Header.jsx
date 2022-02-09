@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lnb from './Lnb';
 import style from '../scss/header.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Controller, Scene } from 'react-scrollmagic';
 import logo from '../assets/logo.svg';
 import icoThemeChange from '../assets/ico_theme_change.svg';
 import icoQna from '../assets/ico_qna.svg';
 
-const Header = ({ onChangeTheme }) => {
+const Header = ({ onChangeTheme, setPath }) => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setPath(pathname);
+  }, [pathname, setPath]);
+
   return (
     <Controller globalSceneOptions={{ triggerHook: 'onLeave' }}>
       <Scene offset={51} classToggle={style.active} pin>

@@ -1,5 +1,50 @@
 import React, { useCallback } from 'react';
 import _ from 'lodash';
+import styled from 'styled-components';
+
+const PageIngBar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const PageIngStatus = styled.div`
+  border: 1px solid #dfdfdf;
+  background-color: #fff;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 18px;
+  margin: 0 30px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  border-radius: 30px;
+`;
+const PagingBtn = styled.button`
+  position: relative;
+  border: 1px solid #dfdfdf;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  cursor: pointer;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -4px;
+    margin-top: -4px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transform-origin: 5px 2px;
+    transform: rotate(45deg);
+    transform: rotate(${(props) => props.value === 'prev' && '-135deg'});
+    transform-origin: ${(props) => props.value === 'prev' && '5px 4px'};
+  }
+`;
 
 const Pageing = ({ data, setData, currentPageIng, setCurrentPageIng }) => {
   const pageSort = useCallback(
@@ -46,25 +91,23 @@ const Pageing = ({ data, setData, currentPageIng, setCurrentPageIng }) => {
   );
 
   return (
-    <>
-      <button
+    <PageIngBar>
+      <PagingBtn
         onClick={(e) =>
           onPageIng(e, Math.ceil(data.showItems.length / data.pageingNum))
         }
         value="prev"
-      >
-        prev
-      </button>
-      {currentPageIng}/{Math.ceil(data.showItems.length / data.pageingNum)}
-      <button
+      />
+      <PageIngStatus>
+        {currentPageIng}/{Math.ceil(data.showItems.length / data.pageingNum)}
+      </PageIngStatus>
+      <PagingBtn
         onClick={(e) =>
           onPageIng(e, Math.ceil(data.showItems.length / data.pageingNum))
         }
         value="next"
-      >
-        next
-      </button>
-    </>
+      />
+    </PageIngBar>
   );
 };
 

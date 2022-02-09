@@ -1,0 +1,215 @@
+@charset "utf-8";
+@import 'lib/setting'; // SASS framework & setting
+
+.cardsWrap {
+  position: relative;
+  display: block;
+  // padding-top: 23px;
+  &.rowAlign {
+  }
+  &.colAlign {
+    .cardList {
+      display: flex;
+      flex-flow: row wrap;
+    }
+    .cardItemWrap {
+      width: 50%;
+      &:nth-child(odd) {
+        padding-right: 6px;
+      }
+      &:nth-child(even) {
+        padding-left: 6px;
+      }
+    }
+    .infoWrap {
+      .infos {
+        flex-wrap: wrap;
+        .by {
+          flex-basis: 100%;
+          margin-top: 8px;
+        }
+        .createInfo {
+          order: -1;
+        }
+      }
+    }
+  }
+}
+
+.alignBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 20px;
+  .alignModes {
+    button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      border: 0.5px solid #dfdfdf;
+      box-sizing: border-box;
+      border-radius: 20px;
+      background-color: #fff;
+      padding: 0 30px 0 10px;
+      height: 22px;
+      font-size: 1.2rem;
+      color: #000;
+      font-weight: 400;
+      margin-right: 6px;
+      cursor: pointer;
+      span {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        margin-top: -9px;
+        transition: 0.5s;
+        img {
+          display: block;
+        }
+      }
+      &.active {
+        font-weight: bold;
+      }
+      &.up {
+        span {
+          transform: rotate(180deg);
+        }
+      }
+      &.down {
+      }
+    }
+  }
+
+  .alignStyles {
+    display: flex;
+    align-items: center;
+    button {
+      margin-left: 8px;
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      &:nth-child(1) {
+        img {
+          filter: var(--card-align-button1);
+        }
+      }
+      &:nth-child(2) {
+        img {
+          filter: var(--card-align-button2);
+        }
+      }
+    }
+  }
+}
+
+.cardList {
+  padding: 20px;
+  transition: 0.5s;
+}
+
+.cardItemWrap {
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.cardItem {
+  background-color: var(--card-item-bg);
+  border-radius: 8px;
+  box-shadow: var(--card-item-shadow);
+  height: 100%;
+  &:first-child {
+    margin-top: 0;
+  }
+  .inner {
+    padding: 16px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .domain {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    font-size: 1rem;
+    background-color: #f5f5f5;
+    color: var(--theme-color);
+    padding: 0 7px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .subject {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--card-item-title);
+    margin-bottom: 14px;
+    flex-basis: 100%;
+    span {
+      color: var(--theme-color);
+    }
+  }
+}
+
+.infoWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-basis: 100%;
+  .infos {
+    flex: 1 1;
+    display: flex;
+    .by {
+      display: inline-flex;
+      align-items: center;
+      font-size: 1.2rem;
+      color: var(--card-item-by);
+      font-weight: 500;
+      text-decoration: none;
+      margin-right: 5px;
+      img {
+        margin-right: 4px;
+      }
+    }
+    .createInfo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      > span {
+        margin-top: 5px;
+      }
+      .score {
+        display: inline-flex;
+        align-items: flex-end;
+        font-size: 1.2rem;
+        color: #949494;
+        font-weight: 400;
+        margin-right: 10px;
+        img {
+          margin-right: 3px;
+        }
+      }
+      .time {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        color: #949494;
+        img {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+  .comment {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--theme-color);
+    font-weight: 500;
+    img {
+      margin-right: 3px;
+    }
+  }
+}

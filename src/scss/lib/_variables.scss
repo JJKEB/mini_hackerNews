@@ -27,19 +27,20 @@ $col-xl-lt: max-width 1199px; // 1199미만
 $col-xl: 1200px; // 1200이상 _ bt3 col-lg   _ bt5 col-xl
 $col-xxl: 1400px; // 1400이상                _ bt5 col-xxl
 
-$themeColor: #ed702d;
+// 모듈 사용시 export
+// $themeColor: #ed702d;
+// :export {
+//   themeColor: $themeColor;
+// }
 
-:export {
-  themeColor: $themeColor;
-}
-
-.light {
+:root {
   --theme-color: #ed702d;
   --theme-bg: #ed702d;
 
   --lnb-bg: #fff;
   --lnb-active-color: #000;
 
+  // page > home 테마 변수
   --home-sec-bg: #fff;
   --home-sec-title: #202020;
   --home-sec-title-arrow: #202020;
@@ -47,18 +48,40 @@ $themeColor: #ed702d;
   --home-sec-itemShadow: 0px 2px 6px rgba(0, 0, 0, 0.1),
     0px 3px 6px rgba(0, 0, 0, 0.05);
   --home-sec-bar: #f5f5f5;
-
   --home-top-item-title: #202020;
   --home-top-item-bg: #fff;
+
+  // sub 공통
+  --sub-bg: #efefef;
+
+  // card components
+  --card-item-bg: #fff;
+  --card-item-title: #202020;
+  --card-item-by: #3f3f3f;
+  --card-item-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1),
+    0px 3px 6px rgba(0, 0, 0, 0.05);
+  --card-align-button1: brightness(5%);
+  --card-align-button2: brightness(150%);
+
+  // Tab Bar
+  --tab-bar-bd: #dfdfdf;
+  --tab-bar-bg: #fff;
+
+  // user ranking
+  --user-ranking-title: #000;
+  --user-ranking-oddBg: #fff;
+  --user-ranking-oddColor: #202020;
+  --user-about: #3f3f3f;
 }
 
-.dark {
+.theme-dark {
   --theme-color: #ed702d;
   --theme-bg: #292c33;
 
   --lnb-bg: #292c33;
   --lnb-active-color: #fff;
 
+  // page > home 테마 변수
   --home-sec-bg: #292c33;
   --home-sec-title: #fff;
   --home-sec-title-arrow: #ed702d;
@@ -66,7 +89,28 @@ $themeColor: #ed702d;
   --home-sec-itemShadow: 0px 2px 6px rgba(0, 0, 0, 0.2),
     0px 6px 8px rgba(0, 0, 0, 0.2);
   --home-sec-bar: #35383c;
-
   --home-top-item-title: #fff;
   --home-top-item-bg: #343538;
+
+  // sub 공통
+  --sub-bg: #292c33;
+
+  // card components
+  --card-item-bg: #343538;
+  --card-item-title: #f5f5f5;
+  --card-item-by: #f5f5f5;
+  --card-item-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2),
+    0px 6px 8px rgba(0, 0, 0, 0.2);
+  --card-align-button1: brightness(60%);
+  --card-align-button2: brightness(200%);
+
+  // Tab Bar
+  --tab-bar-bd: #555;
+  --tab-bar-bg: #343538;
+
+  // user ranking
+  --user-ranking-title: #fff;
+  --user-ranking-oddBg: #343538;
+  --user-ranking-oddColor: #fff;
+  --user-about: #f5f5f5;
 }

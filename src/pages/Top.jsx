@@ -1,10 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
 import CardList from '../components/CardList';
 import Pageing from '../components/Pageing';
 import Align from '../components/Align';
 import UserRank from '../components/top/UserRank';
+import Progress from '../components/Progress';
+import TabBar from '../components/TabBar';
 import _ from 'lodash';
+import style from '../scss/cards.module.scss';
 
 const Top = () => {
   const [data, setData] = useState({
@@ -23,15 +25,57 @@ const Top = () => {
   // pageing 위치 확인 상태
   const [currentPageIng, setCurrentPageIng] = useState(1);
 
+  // 정렬 스타일 상태
+  const [alignStyle, setAlignStyle] = useState(style.rowAlign);
+
+  const [userInfo, setUserInfo] = useState({
+    infoList: [], // 받아온 전체 유저 데이터
+    sortedList: [], // 순위 정렬후 50개만 추출한 데이터
+    loaded: false, // api 재요청 차단용
+  });
+
+  const onUserAdd = useCallback(
+    (getInfo) => {
+      setUserInfo((info) => {
+        const newInfos = _.cloneDeep(info);
+        newInfos.infoList = newInfos.infoList.concat(getInfo);
+        if (data.userList.length === newInfos.infoList.length) {
+          let newArr = [];
+          newInfos.infoList.forEach((item, i) => {
+            newArr[i] = {};
+            newArr[i].id = item.id;
+            newArr[i].karma = item.karma;
+          });
+          // 순서 정렬
+          const sortList = newArr.sort((a, b) => {
+            return Number(b.karma) - Number(a.karma);
+          });
+          const uniqList = _.uniqBy(sortList, 'id'); // 중복 값 제거
+          const sliceList = uniqList.slice(0, 50); // 앞 50개만 추출
+
+          newInfos.sortedList = sliceList;
+          newInfos.loaded = true;
+        }
+        return newInfos;
+      });
+    },
+    [data.userList.length],
+  );
+
   // tab 컴포넌트 리스트
   const tabs = {
     post: <CardList type="topstories" data={data} setData={setData} />,
-    user: <UserRank userList={data.userList} />,
+    user: (
+      <UserRank
+        userList={data.userList}
+        userInfo={userInfo}
+        onUserAdd={onUserAdd}
+      />
+    ),
   };
+
+  // 선택된 탭 관리 상태
   const [selectTab, setSelectTab] = useState('post');
-  const changeTab = useCallback((nextTab) => {
-    setSelectTab(nextTab);
-  }, []);
 
   // 로딩 완료시 user 리스트 추출
   useEffect(() => {
@@ -45,23 +89,27 @@ const Top = () => {
   }, [data.loadCompletion]);
 
   return (
-    <div className="cards-wrap">
-      <NavLink to="/top">Post</NavLink>
-      <NavLink to={{ pathname: '/top/user', userList: { data } }}>User</NavLink>
-
-      {data.limit}
-      {data.loaded}
+    <div className={`${style.cardsWrap} ${alignStyle}`}>
+      <Progress
+        active={true}
+        progress={Math.floor((data.loaded / data.limit) * 100)}
+      />
 
       {data.loadCompletion && (
-        <div className="tabs">
-          <button onClick={() => changeTab('post')}>Post</button>
-          <button onClick={() => changeTab('user')}>user</button>
-        </div>
+        <TabBar
+          tabs={['post', 'user']}
+          selectTab={selectTab}
+          setSelectTab={setSelectTab}
+        />
       )}
 
       {data.loadCompletion && selectTab === 'post' ? (
         <>
-          <Align setData={setData} setCurrentPageIng={setCurrentPageIng} />
+          <Align
+            setData={setData}
+            setCurrentPageIng={setCurrentPageIng}
+            setAlignStyle={setAlignStyle}
+          />
         </>
       ) : null}
 
