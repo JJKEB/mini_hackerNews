@@ -55,6 +55,7 @@ const CardList = ({ type, id, data, setData }) => {
           onAdd={onAddItems}
           pageing={data.pageingNum}
           loadCompletion={data.loadCompletion}
+          viewPages={type}
         />
       ))}
     </div>

@@ -8,6 +8,7 @@ import User from './pages/User';
 import New from './pages/New';
 import Show from './pages/Show';
 import Ask from './pages/Ask';
+import AskView from './pages/AskView';
 import Job from './pages/Job';
 import './scss/style.scss';
 
@@ -30,8 +31,9 @@ function App() {
           </Route>
 
           <Route path="/new" element={<New />} />
-          <Route path="/Show" element={<Show />} />
-          <Route path="/Ask" element={<Ask />} />
+          <Route path="/show" element={<Show />} />
+          <Route path="/ask" element={<Ask />} />
+          <Route path="/ask/:id" element={<AskView />} />
           <Route path="/Job" element={<Job />} />
 
           <Route path="/" element={<Home />} />

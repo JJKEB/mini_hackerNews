@@ -1,8 +1,7 @@
 import React from 'react';
 import useGetData from '../lib/useGetData';
-import { txtSplit, lastTime, isDomain } from '../lib/utils';
+import { txtSplit, lastTime, isDomain, getInnerHtml } from '../lib/utils';
 import { Link } from 'react-router-dom';
-import { getInnerHtml } from '../lib/utils';
 import style from '../scss/cards.module.scss';
 
 import icoBy from '../assets/ico_profile.svg';
@@ -10,7 +9,15 @@ import icoComment from '../assets/ico_comment.svg';
 import icoTime from '../assets/ico_time.svg';
 import icoPoint from '../assets/ico_point.svg';
 
-const CardItem = ({ type, id, onAdd, index, pageing, loadCompletion }) => {
+const CardItem = ({
+  type,
+  id,
+  onAdd,
+  index,
+  pageing,
+  loadCompletion,
+  viewPages,
+}) => {
   const [loading, resolved, error] = useGetData(
     type,
     id,
@@ -20,8 +27,6 @@ const CardItem = ({ type, id, onAdd, index, pageing, loadCompletion }) => {
   if (loading) return null;
   if (error) return console.log('에러발생');
   if (!resolved) return null;
-
-  // console.log(resolved);
 
   const { title, text, by, time, score, descendants, url } = resolved;
 
@@ -42,7 +47,16 @@ const CardItem = ({ type, id, onAdd, index, pageing, loadCompletion }) => {
               </a>
             )}
 
-            <strong className={style.subject}>{txtSplit(title, 'HN:')}</strong>
+            {viewPages === 'askstories' ? (
+              <strong className={style.subject}>
+                <Link to={`/ask/${id}`}>{txtSplit(title, 'HN:')}</Link>
+              </strong>
+            ) : (
+              <strong className={style.subject}>
+                {txtSplit(title, 'HN:')}
+              </strong>
+            )}
+
             {text && <div className={style.text}>{getInnerHtml(text)}</div>}
             <div className={style.infoWrap}>
               <div className={style.infos}>

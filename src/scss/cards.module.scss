@@ -148,6 +148,11 @@
     color: var(--card-item-title);
     margin-bottom: 14px;
     flex-basis: 100%;
+    > a {
+      color: var(--card-item-title);
+      display: block;
+      text-decoration: none;
+    }
     span {
       color: var(--theme-color);
     }
