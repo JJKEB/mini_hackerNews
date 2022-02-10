@@ -7,8 +7,6 @@ const ViewAsk = ({ id }) => {
   if (error) return console.log('에러발생');
   if (!resolved) return null;
 
-  console.log(resolved);
-
   return <div></div>;
 };
 
