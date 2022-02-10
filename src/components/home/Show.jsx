@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import ShowItem from './ShowItem';
+import { Link } from 'react-router-dom';
 import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
@@ -71,7 +72,9 @@ const Show = ({ type, id }) => {
   return (
     <section className={`${style.section} ${style.full} ${style.show}`}>
       <div className={style.head}>
-        <h2>Today's Show</h2>
+        <h2>
+          <Link to="/show">Today's Show</Link>
+        </h2>
         <button className={style.reload} onClick={() => onReload(data)}>
           <img src={icoReload} alt="" />
         </button>

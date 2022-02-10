@@ -140,6 +140,7 @@
     padding: 0 7px;
     border-radius: 8px;
     margin-bottom: 10px;
+    text-decoration: none;
   }
   .subject {
     font-size: 1.6rem;
@@ -151,6 +152,13 @@
       color: var(--theme-color);
     }
   }
+  .text {
+    font-size: 1.2rem;
+    color: var(--card-item-title);
+    font-weight: 400;
+    line-height: 1.4;
+    @include multiLine(4);
+  }
 }
 
 .infoWrap {
@@ -158,9 +166,11 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-basis: 100%;
+  padding-top: 15px;
   .infos {
     flex: 1 1;
     display: flex;
+    align-items: center;
     .by {
       display: inline-flex;
       align-items: center;
@@ -177,9 +187,6 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      > span {
-        margin-top: 5px;
-      }
       .score {
         display: inline-flex;
         align-items: flex-end;

@@ -50,6 +50,7 @@ const User = () => {
   const userId = location.pathname.split('/user/')[1]; // 조회할 user id
 
   const [loading, resolved, error] = useGetData('user', userId);
+
   if (loading) return null;
   if (error) return console.log('에러발생');
   if (!resolved) return null;

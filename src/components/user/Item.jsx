@@ -1,6 +1,7 @@
 import React from 'react';
 import { useVisibilityHook } from 'react-observer-api';
 import { lastTime, txtSplit, isDomain } from '../../lib/utils';
+import { getInnerHtml } from '../../lib/utils';
 import styled from 'styled-components';
 import icoBy from '../../assets/ico_profile.svg';
 import icoComment from '../../assets/ico_comment.svg';
@@ -106,7 +107,10 @@ const Item = ({ data }) => {
           <div className="title">
             {data.title && txtSplit(data.title, 'HN:')}
           </div>
-          <div className="txt">{data.text && data.text}</div>
+          {data.text && (
+            <div className="txt multi-line4">{getInnerHtml(data.text)}</div>
+          )}
+
           <a href={data.url} target="_blank" rel="noreferrer" className="url">
             {data.url && isDomain(data.url)}
           </a>

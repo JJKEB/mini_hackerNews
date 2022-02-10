@@ -56,3 +56,10 @@ export const isDomain = (strUrl) => {
     ? urlObj.host.split('www.')[1]
     : urlObj.host;
 };
+
+export const getInnerHtml = (text) => {
+  function createMarkup() {
+    return { __html: text };
+  }
+  return <div dangerouslySetInnerHTML={createMarkup()} />;
+};

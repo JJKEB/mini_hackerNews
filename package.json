@@ -19,6 +19,7 @@
     "react-scripts": "5.0.0",
     "react-scrollmagic": "^2.3.0",
     "react-slick": "^0.28.1",
+    "react-swiper": "^0.1.5",
     "sass": "^1.49.0",
     "scroll-to-plugin": "^1.0.1",
     "scrollmagic": "^2.0.8",

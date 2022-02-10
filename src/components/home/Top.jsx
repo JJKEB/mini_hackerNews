@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import style from '../../scss/home.module.scss';
 import TopItem from './TopItem';
+import { Link } from 'react-router-dom';
 import useGetData from '../../lib/useGetData';
 import Slider from 'react-slick';
 import _ from 'lodash';
@@ -57,7 +58,9 @@ const Top = ({ type, id }) => {
   return (
     <section className={style.section}>
       <div className={style.head}>
-        <h2>Today's top</h2>
+        <h2>
+          <Link to="/top">Today's top</Link>
+        </h2>
         <span className={style.uptime}>
           <img src={icoClock} alt="" />
           {data.searchTime}:00

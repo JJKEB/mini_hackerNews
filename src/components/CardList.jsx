@@ -32,8 +32,6 @@ const CardList = ({ type, id, data, setData }) => {
         // 정해진 갯수만큼 아이템 로드가 완료됬을시
         if (newData.limit === newData.loaded) {
           newData.loadCompletion = true;
-          // const userList = newData.showItems.map((item) => item.by);
-          // console.log(userList);
         }
         return newData;
       });

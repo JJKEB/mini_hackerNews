@@ -77,3 +77,15 @@ a {
 .multi-line2 {
   @include multiLine(2);
 }
+
+.multi-line3 {
+  @include multiLine(3);
+}
+
+.multi-line4 {
+  @include multiLine(4);
+}
+
+.multi-line5 {
+  @include multiLine(5);
+}

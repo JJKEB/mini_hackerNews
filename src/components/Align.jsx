@@ -6,6 +6,12 @@ import icoCol from '../assets/icon_align_col.svg';
 import icoRow from '../assets/icon_align_row.svg';
 import icoArrow from '../assets/icon_arrow_down.svg';
 
+/**
+ * @param {*} setData - 게시글 관리 state data - 필수
+ * @param {*} setCurrentPageIng // 정렬 이후 페이징 초기화 하기 위한 함수 - 필수
+ * @param {*} setAlignStyle // row col 정렬 setState 함수 없을시 표지 하지 않음 - 미필수
+ * @returns
+ */
 const Align = ({ setData, setCurrentPageIng, setAlignStyle }) => {
   // 아이템 정렬 상태
   const [aligns, setAligns] = useState({

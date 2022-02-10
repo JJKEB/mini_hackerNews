@@ -1,15 +1,19 @@
 import React, { useState, useCallback } from 'react';
-import NewItem from './NewItem';
-import { Link } from 'react-router-dom';
+import JobItem from './JobItem';
 import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import _ from 'lodash';
-import icoReload from '../../assets/ico_reload.svg';
 
-const New = ({ type, id }) => {
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+
+const Job = ({ type, id }) => {
   const [data, setData] = useState({
-    limit: 4, // 랜더링할 갯수
+    limit: 5, // 랜더링할 갯수
     loaded: 0, // 랜더링한 갯수
     searchTime: 0, // Api 조회한 시간
     dataAll: [], // 받은 데이터 전부
@@ -64,22 +68,27 @@ const New = ({ type, id }) => {
   if (!resolved) return null;
 
   return (
-    <section className={style.section}>
+    <section className={`${style.section} ${style.full} ${style.job}`}>
       <div className={style.head}>
-        <h2>
-          <Link to="/new">Today's New</Link>
-        </h2>
-        <button className={style.reload} onClick={() => onReload(data)}>
-          <img src={icoReload} alt="" />
-        </button>
+        <h2>Today's Job</h2>
+        <button className={style.reload} onClick={() => onReload(data)} />
       </div>
-      <div className={style.contents}>
-        {data.showList.map((id) => (
-          <NewItem key={id} type={'item'} id={id} onAdd={onAddItems} />
-        ))}
+      <div className={style['job--contents']}>
+        <Swiper
+          slidesPerView={2}
+          spaceBetween={16}
+          freeMode={true}
+          className="mySwiper"
+        >
+          {data.showList.map((id) => (
+            <SwiperSlide key={id}>
+              <JobItem type={'item'} id={id} onAdd={onAddItems} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );
 };
 
-export default React.memo(New);
+export default React.memo(Job);

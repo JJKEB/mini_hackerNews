@@ -39,6 +39,10 @@
         border-right: 3px solid var(--home-sec-title-arrow);
         transform: rotate(45deg);
       }
+      a {
+        text-decoration: none;
+        color: var(--home-sec-title);
+      }
     }
     .uptime {
       display: flex;
@@ -283,11 +287,12 @@
 
 .job {
   .job--contents {
-    display: flex;
+    // display: flex;
   }
   .job-item {
     padding-left: 20px;
     height: 100%;
+    box-sizing: border-box;
     .job-item--inner {
       display: flex;
       flex-wrap: wrap;
@@ -297,7 +302,7 @@
       > a {
         display: flex;
         flex-wrap: wrap;
-        height: 100%;
+        min-height: 134px;
         background-color: #eaf4f8;
         padding: 16px 12px;
         text-decoration: none;
@@ -320,7 +325,7 @@
           font-weight: 700;
           color: #000;
           margin-bottom: 14px;
-          @include multiLine(4);
+          @include multiLine(3);
         }
         .job--bottom {
           width: 100%;

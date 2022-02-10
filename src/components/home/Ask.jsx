@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import AskItem from './AskItem';
+import { Link } from 'react-router-dom';
 import style from '../../scss/home.module.scss';
 import useGetData from '../../lib/useGetData';
 import { randomNum } from '../../lib/utils';
@@ -65,7 +66,9 @@ const Ask = ({ type, id }) => {
   return (
     <section className={style.section}>
       <div className={style.head}>
-        <h2>Today's Ask</h2>
+        <h2>
+          <Link to="/ask">Today's Ask</Link>
+        </h2>
         <button className={style.reload} onClick={() => onReload(data)}>
           <img src={icoReload} alt="" />
         </button>
