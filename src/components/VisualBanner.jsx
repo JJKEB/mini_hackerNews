@@ -22,7 +22,6 @@ const VisualBn = styled('div')`
   img {
     display: block;
     width: 100%;
-    vertical-align: top;
   }
   div {
     vertical-align: top;
@@ -46,18 +45,20 @@ const VisualBanner = ({ path }) => {
     arrows: false,
     fade: true,
     infinite: false,
-    speed: 500,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
 
   useEffect(() => {
-    const indexNum =
-      currentPath === ''
-        ? banners['default'].index
-        : banners[currentPath].index;
-    Bn.current.slickGoTo(indexNum);
-  }, [currentPath]);
+    if (!currentParams) {
+      const indexNum =
+        currentPath === ''
+          ? banners['default'].index
+          : banners[currentPath].index;
+      Bn.current.slickGoTo(indexNum);
+    }
+  }, [currentParams, currentPath]);
 
   return (
     <>
